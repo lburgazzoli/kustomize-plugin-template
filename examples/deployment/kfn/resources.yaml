@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo-deployment
+spec:
+  replicas: << .resources.fixed.replicas >>
+  selector:
+    matchLabels:
+      control-plane: foo-component
+  template:
+    metadata:
+      labels:
+        app: foo-component
+    spec:
+      containers:
+        - name: manager
+          image: quay.io/lburgazzoli/component:latest
+          resources:
+            limits:
+              cpu: << .resources.fixed.resources.limits.cpu >>
+              memory: << .resources.fixed.resources.limits.memory >>
+            requests:
+              cpu: << .resources.fixed.resources.requests.cpu >>
+              memory: << .resources.fixed.resources.requests.memory >>

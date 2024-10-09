@@ -1,0 +1,21 @@
+apiVersion: kustomize.lburgazzoli.github.io/v1alpha1
+kind: TemplateTransform
+metadata:
+  name: template-transformer
+  annotations:
+    config.kubernetes.io/function: |
+      container:
+        image: quay.io/lburgazzoli/kustomize-plugin-template:latest
+spec:
+  values:
+    resources:
+      type: fixed
+      fixed:
+        replicas: 1
+        resources:
+          limits:
+            cpu: 123m
+            memory: 456Mi
+          requests:
+            cpu: 321m
+            memory: 654Mi
